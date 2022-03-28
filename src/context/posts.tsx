@@ -1,15 +1,17 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import posts from '../components/Feed/postData.json';
 type post = {
   title: string;
   text: string;
 };
+
 type InitialState = {
   posts: Array<post>;
 };
 type Actions = {
   addPost: (post: post) => void;
 };
+
 type ReducerActionTypes =
   | {
       type: 'ADD_POST';
@@ -35,7 +37,7 @@ const reducer = (
     case 'ADD_POST': {
       return {
         ...state,
-        posts: [...state.posts, action.payload.post],
+        posts: [action.payload.post, ...state.posts],
       };
     }
     case 'INIT_POSTS': {
@@ -81,4 +83,14 @@ export const usePost = () => {
     },
   };
 };
-export const PostContext = createContext<Array<post>>([]);
+
+export const PostContext = createContext<{
+  state: InitialState;
+  actions: Actions;
+}>({
+  state: initialState,
+  actions: {
+    addPost: (post: post) => {},
+  },
+});
+export const usePostContext = () => useContext(PostContext);

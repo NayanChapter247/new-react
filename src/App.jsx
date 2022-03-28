@@ -4,9 +4,7 @@ import Feed from './components/Feed/Feed';
 import Leftbar from './components/Leftbar';
 import Navbar from './components/Navbar';
 import Rightbar from './components/Rightbar';
-// import posts from './components/Feed/postData.json';
 import { PostContext, usePost } from './context/posts';
-import { useCallback, useEffect } from 'react';
 const useStyles = makeStyles((theme) => ({
   right: {
     display: 'block',
@@ -19,13 +17,9 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const styles = useStyles();
   const { state, actions } = usePost();
-  const { posts } = state;
-  useEffect(() => {
-    console.log('useEffect=> ', posts);
-  }, [posts]);
   return (
     <div>
-      <PostContext.Provider value={posts}>
+      <PostContext.Provider value={{ state, actions }}>
         <Navbar />
         <Grid container>
           <Grid item sm={1} md={2} xs={2}>

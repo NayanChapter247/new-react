@@ -9,8 +9,8 @@ import {
   PhoneAndroid,
   Settings,
 } from '@material-ui/icons';
-import { useCallback } from 'react';
-import { usePost } from '../context/posts';
+import { useCallback, useContext } from 'react';
+import { PostContext } from '../context/posts';
 const useStyles = makeStyles((theme) => ({
   container: {
     height: '100vh',
@@ -57,8 +57,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Leftbar = () => {
   const styles = useStyles();
-  const { state, actions } = usePost();
-  const { posts } = state;
+  const posts = useContext(PostContext);
   useCallback(() => {
     console.log('21  leftbar=> ', posts);
   }, [posts]);

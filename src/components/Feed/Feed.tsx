@@ -1,7 +1,6 @@
 import { Container, makeStyles } from '@material-ui/core';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { PostContext, usePost } from '../../context/posts';
-import Add from '../Add';
+import { usePostContext } from '../../context/posts';
+
 import Post from '../post';
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -10,11 +9,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Feed = () => {
-  // const { state, actions } = usePost();
-  const posts = useContext(PostContext);
-
+  const { state } = usePostContext();
+  const { posts } = state;
   const styles = useStyles();
-  console.log('24  feed=> ', posts);
   return (
     <Container className={styles.container}>
       {posts.length &&

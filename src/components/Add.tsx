@@ -13,14 +13,13 @@ import {
   Typography,
 } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-// import { Alert } from '@material-ui/lab';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { Fab, Tooltip } from '@material-ui/core';
 import { AddOutlined } from '@material-ui/icons';
-import React, { useCallback, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { usePost } from '../context/posts';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { usePostContext } from '../context/posts';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -80,7 +79,8 @@ const schema = Yup.object().shape({
 });
 const Add = () => {
   const styles = useStyles();
-  const { state, actions } = usePost();
+  const { actions } = usePostContext();
+  // const posts = useContext(PostContext);
   const {
     handleSubmit,
     setValue,
@@ -100,9 +100,6 @@ const Add = () => {
     setSnack(true);
     setOpen(false);
   };
-  useCallback(() => {
-    console.log('106 => ', state);
-  }, [snack]);
   return (
     <>
       <Tooltip title='Add' aria-label='add' onClick={() => setOpen(true)}>

@@ -13,6 +13,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import { useState } from 'react';
 import clsx from 'clsx';
+import { usePostContext } from '../context/posts';
 
 const useStyles = makeStyles((theme: any) => ({
   toolbar: {
@@ -88,6 +89,8 @@ const useStyles = makeStyles((theme: any) => ({
 const Navbar = () => {
   const [mySearch, setMySearch] = useState(false);
   const styles = useStyles({ mySearch });
+  const { state } = usePostContext();
+  const { posts } = state;
   return (
     <AppBar position='fixed'>
       <Toolbar className={styles.toolbar}>
@@ -112,7 +115,7 @@ const Navbar = () => {
             </div>
             <Badge
               color='secondary'
-              badgeContent={1}
+              badgeContent={posts.length}
               className={clsx(styles['pad-12'], styles['cursor-pointer'])}
             >
               <MailIcon />

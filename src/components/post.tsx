@@ -8,8 +8,6 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import { useCallback } from 'react';
-import { usePost } from '../context/posts';
 const useStyles = makeStyles((theme) => ({
   card: {
     marginBottom: theme.spacing(5),
@@ -29,10 +27,6 @@ type PostProps = {
   text: string;
 };
 const Post = ({ title, text }: PostProps) => {
-  const { state, actions } = usePost();
-  useCallback(() => {
-    console.log('34-------------------------- -> ', state);
-  }, [state.posts]);
   const styles = useStyles();
   return (
     <Card className={styles.card}>
@@ -44,18 +38,9 @@ const Post = ({ title, text }: PostProps) => {
         />
         <CardContent>
           <Typography gutterBottom variant='h5'>
-            My Post
+            {title}
           </Typography>
-          <Typography variant='body2'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. Lorem Ipsum is simply
-            dummy text of the printing and typesetting industry. Lorem Ipsum has
-            been the industry's standard dummy text ever since the 1500s, when
-            an unknown printer took a galley of type and scrambled it to make a
-            type specimen book.
-          </Typography>
+          <Typography variant='body2'>{text}</Typography>
         </CardContent>
         <CardActions>
           <Button variant='outlined' color='primary' size='small'>
